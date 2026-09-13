@@ -1,10 +1,10 @@
 import axios from "axios";
 
-// http://localhost:5001/api/admin/orders
+// http://ecom2024-api.vercel.app/api/admin/orders
 
 export const getOrdersAdmin = async (token) => {
   // code body
-  return axios.get("http://localhost:5001/api/admin/orders", {
+  return axios.get("https://ecom2024-api.vercel.app/api/admin/orders", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -13,7 +13,7 @@ export const getOrdersAdmin = async (token) => {
 export const changeOrderStatus = async (token, orderId, orderStatus) => {
   // code body
   return axios.put(
-    "http://localhost:5001/api/admin/order-status",
+    "https://ecom2024-api.vercel.app/api/admin/order-status",
     {
       orderId,
       orderStatus,
@@ -22,32 +22,31 @@ export const changeOrderStatus = async (token, orderId, orderStatus) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 };
 
-
 export const getListAllUsers = async (token) => {
   // code body
-  return axios.get("http://localhost:5001/api/users", {
+  return axios.get("https://ecom2024-api.vercel.app/api/users", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
 
-export const changeUserStatus = async (token,value) => {
+export const changeUserStatus = async (token, value) => {
   // code body
-  return axios.post("http://localhost:5001/api/change-status",value, {
+  return axios.post("https://ecom2024-api.vercel.app/api/change-status", value, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
 
-export const changeUserRole = async (token,value) => {
+export const changeUserRole = async (token, value) => {
   // code body
-  return axios.post("http://localhost:5001/api/change-role",value, {
+  return axios.post("https://ecom2024-api.vercel.app/api/change-role", value, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

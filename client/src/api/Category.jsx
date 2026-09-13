@@ -1,25 +1,28 @@
-import axios from 'axios'
+import axios from "axios";
 
 export const listCategory = async (token) => {
-  return await axios.get('http://localhost:5001/api/category', {
+  return await axios.get("https://ecom2024-api.vercel.app/api/category", {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const createCategory = async (token, data) => {
-  return await axios.post('http://localhost:5001/api/category', data, {
+  return await axios.post("https://ecom2024-api.vercel.app/api/category", data, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const removeCategory = async (token, id) => {
-  return await axios.delete('http://localhost:5001/api/category/' + id, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-}
+  return await axios.delete(
+    "https://ecom2024-api.vercel.app/api/category/" + id,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+};

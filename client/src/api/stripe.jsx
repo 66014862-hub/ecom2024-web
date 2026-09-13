@@ -1,9 +1,12 @@
-import axios from 'axios'
+import axios from "axios";
 
-
-export const payment = async (token) => 
-    await axios.post('http://localhost:5001/api/user/create-payment-intent', {}, {
-    headers: {
-        Authorization: `Bearer ${token}`
-    }
-})
+export const payment = async (token) =>
+  await axios.post(
+    "https://ecom2024-api.vercel.app/api/user/create-payment-intent",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );

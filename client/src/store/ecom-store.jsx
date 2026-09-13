@@ -1,9 +1,9 @@
-import axios from 'axios'
-import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
-import { listCategory } from '../api/Category' 
-import { listProduct, searchFilters } from '../api/Product'
-import _ from 'lodash'
+import axios from "axios";
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { listCategory } from "../api/Category";
+import { listProduct, searchFilters } from "../api/Product";
+import _ from "lodash";
 
 const ecomStore = (set, get) => ({
   user: null,
@@ -14,51 +14,54 @@ const ecomStore = (set, get) => ({
 
   // เพิ่มสินค้าลงตะกร้า
   actionAddtoCart: (product) => {
-    const carts = get().carts || [] 
-    const index = carts.findIndex((item) => item.id === product.id)
+    const carts = get().carts || [];
+    const index = carts.findIndex((item) => item.id === product.id);
 
     if (index !== -1) {
-      const updatedCart = [...carts]
+      const updatedCart = [...carts];
       updatedCart[index] = {
         ...updatedCart[index],
-        count: (updatedCart[index].count || 1) + 1
-      }
-      set({ carts: updatedCart }) 
+        count: (updatedCart[index].count || 1) + 1,
+      };
+      set({ carts: updatedCart });
     } else {
-      set({ carts: [...carts, { ...product, count: 1 }] }) 
+      set({ carts: [...carts, { ...product, count: 1 }] });
     }
   },
 
   // อัปเดตจำนวนสินค้า (+1 / -1)
   actionUpdateQuantity: (productId, delta) => {
-    const carts = get().carts || []
+    const carts = get().carts || [];
     const updatedCart = carts
       .map((item) => {
         if (item.id === productId) {
-          const newCount = (item.count || 1) + delta
-          return newCount > 0 ? { ...item, count: newCount } : null
+          const newCount = (item.count || 1) + delta;
+          return newCount > 0 ? { ...item, count: newCount } : null;
         }
-        return item
+        return item;
       })
-      .filter(Boolean)
+      .filter(Boolean);
 
-    set({ carts: updatedCart })
+    set({ carts: updatedCart });
   },
 
   // ลบสินค้าออกจากตะกร้า
   actionRemoveItem: (productId) => {
-    const carts = get().carts || []
-    const updatedCart = carts.filter((item) => item.id !== productId)
-    set({ carts: updatedCart })
+    const carts = get().carts || [];
+    const updatedCart = carts.filter((item) => item.id !== productId);
+    set({ carts: updatedCart });
   },
 
   actionsLogin: async (form) => {
-    const res = await axios.post('http://localhost:5001/api/login', form)
+    const res = await axios.post(
+      "http://ecom2024-api.vercel.app/api/login",
+      form,
+    );
     set({
       user: res.data.payload,
-      token: res.data.token
-    })
-    return res
+      token: res.data.token,
+    });
+    return res;
   },
 
   // 👇 เพิ่มฟังก์ชัน logout ตรงนี้เพื่อเคลียร์ user และ token ให้เป็น null
@@ -66,24 +69,24 @@ const ecomStore = (set, get) => ({
     set({
       user: null,
       token: null,
-    })
+    });
   },
 
   getCategory: async () => {
     try {
-      const res = await listCategory()
-      set({ categories: res.data })
+      const res = await listCategory();
+      set({ categories: res.data });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   },
 
   getProduct: async (count = 100) => {
     try {
-      const res = await listProduct(count)
-      set({ products: res.data })
+      const res = await listProduct(count);
+      set({ products: res.data });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   },
 
@@ -99,27 +102,26 @@ const ecomStore = (set, get) => ({
         return;
       }
 
-      const res = await searchFilters(arg)
-      set({ products: res.data }) 
+      const res = await searchFilters(arg);
+      set({ products: res.data });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   },
 
   clearCart: () => set({ carts: [] }),
 });
 
-
 const usePersist = {
-  name: 'ecom-storage',
+  name: "ecom-storage",
   storage: createJSONStorage(() => localStorage),
-  partialize: (state) => ({ 
-    user: state.user, 
+  partialize: (state) => ({
+    user: state.user,
     token: state.token,
-    carts: state.carts // บันทึกตะกร้าลง LocalStorage
+    carts: state.carts, // บันทึกตะกร้าลง LocalStorage
   }),
-}
+};
 
-const useEcomStore = create(persist(ecomStore, usePersist))
+const useEcomStore = create(persist(ecomStore, usePersist));
 
-export default useEcomStore
+export default useEcomStore;
