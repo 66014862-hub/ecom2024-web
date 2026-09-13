@@ -56,7 +56,7 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        "http://ecom2024-api.vercel.app/api/register",
+        "https://ecom2024-api.vercel.app/api/register",
         {
           email: data.email,
           password: data.password,

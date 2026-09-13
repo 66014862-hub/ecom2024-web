@@ -38,7 +38,7 @@ const Dashboard = () => {
     const fetchAdminOrders = async () => {
       try {
         const res = await axios.get(
-          "http://ecom2024-api.vercel.app/api/admin/orders",
+          "https://ecom2024-api.vercel.app/api/admin/orders",
           {
             headers: { Authorization: `Bearer ${token}` },
           },

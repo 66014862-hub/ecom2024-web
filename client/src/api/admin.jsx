@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// http://ecom2024-api.vercel.app/api/admin/orders
+// https://ecom2024-api.vercel.app/api/admin/orders
 
 export const getOrdersAdmin = async (token) => {
   // code body
@@ -37,11 +37,15 @@ export const getListAllUsers = async (token) => {
 
 export const changeUserStatus = async (token, value) => {
   // code body
-  return axios.post("https://ecom2024-api.vercel.app/api/change-status", value, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  return axios.post(
+    "https://ecom2024-api.vercel.app/api/change-status",
+    value,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 };
 
 export const changeUserRole = async (token, value) => {
