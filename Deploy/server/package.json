@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "start": "nodemon server",
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "postinstall": "prisma generate"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "4.21",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.7",
+    "stripe": "^22.6.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.20.0"
+  }
+}
